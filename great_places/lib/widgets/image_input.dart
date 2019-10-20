@@ -26,7 +26,7 @@ class _ImageInputState extends State<ImageInput> {
     });
     final appDir = await path_provider.getApplicationDocumentsDirectory();
     final fileName = path.basename(imageFile.path);
-    final savedImage = await imageFile.copy('${appDir.path}/${fileName}');
+    final savedImage = await imageFile.copy('${appDir.path}/$fileName');
     widget.onSelectImage(savedImage);
   }
 
@@ -35,12 +35,15 @@ class _ImageInputState extends State<ImageInput> {
       source: ImageSource.gallery,
       maxWidth: 600,
     );
+    if (imageFile == null) {
+      return null;
+    }
     setState(() {
       _storedImage = imageFile;
     });
     final appDir = await path_provider.getApplicationDocumentsDirectory();
     final fileName = path.basename(imageFile.path);
-    final savedImage = await imageFile.copy('${appDir.path}/${fileName}');
+    final savedImage = await imageFile.copy('${appDir.path}/$fileName');
     widget.onSelectImage(savedImage);
   }
 
